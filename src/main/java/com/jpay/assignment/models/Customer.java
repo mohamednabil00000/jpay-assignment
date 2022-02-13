@@ -1,4 +1,4 @@
-package com.jpay.assignment.model;
+package com.jpay.assignment.models;
 
 import java.io.Serializable;
 import javax.persistence.Entity;

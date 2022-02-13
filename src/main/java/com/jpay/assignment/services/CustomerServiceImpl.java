@@ -1,5 +1,6 @@
 package com.jpay.assignment.services;
 
+import com.jpay.assignment.helpers.CountryCodeHelper;
 import com.jpay.assignment.models.Customer;
 import com.jpay.assignment.dtos.CustomerDTO;
 import com.jpay.assignment.repos.CustomerDAO;
@@ -25,6 +26,15 @@ public class CustomerServiceImpl {
 
   public List<CustomerDTO> getAllCustomer(int page, int size){
     Page<Customer> customersPage = customerDAO.findAll(PageRequest.of(page, size));
+    return customersPage.getContent().stream()
+        .map(customer -> modelMapper.map(customer, CustomerDTO.class))
+        .collect(Collectors.toList());
+  }
+
+  public List<CustomerDTO> getAllCustomerByCountry(int page, int size, String country){
+    String countryCode = CountryCodeHelper.getCountryCode(country);
+
+    Page<Customer> customersPage = customerDAO.findByPhoneStartingWith(countryCode, PageRequest.of(page, size));
     return customersPage.getContent().stream()
         .map(customer -> modelMapper.map(customer, CustomerDTO.class))
         .collect(Collectors.toList());

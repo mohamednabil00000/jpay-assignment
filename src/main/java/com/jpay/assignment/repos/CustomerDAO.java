@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface CustomerDAO extends JpaRepository<Customer, Integer> {
 
   Page<Customer> findAll(Pageable pageable);
+  Page<Customer> findByPhoneStartingWith(String prefix, Pageable pageable);
 }

@@ -14,7 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerServiceImpl {
+public class CustomerServiceImpl implements CustomerService {
 
   private final CustomerDAO customerDAO;
   private ModelMapper modelMapper;
@@ -25,6 +25,7 @@ public class CustomerServiceImpl {
     this.modelMapper = modelMapper;
   }
 
+  @Override
   public List<CustomerDTO> getAllCustomer(int page, int size){
     Page<Customer> customersPage = customerDAO.findAll(PageRequest.of(page, size));
     return customersPage.getContent().stream()
@@ -32,7 +33,8 @@ public class CustomerServiceImpl {
         .collect(Collectors.toList());
   }
 
-  public List<CustomerDTO> getAllCustomerByCountry(int page, int size, String country, String state){
+  @Override
+  public List<CustomerDTO> getAllCustomerByCountryAndState(int page, int size, String country, String state){
     String countryCode = CountryCodeHelper.getCountryCode(country);
     List<Customer> customers;
     if(state == null)
@@ -47,6 +49,7 @@ public class CustomerServiceImpl {
         .collect(Collectors.toList());
   }
 
+  @Override
   public List<CustomerDTO> getAllCustomerByState(int page, int size, String state){
     List<Customer> customersPage;
     int offset = page * size;

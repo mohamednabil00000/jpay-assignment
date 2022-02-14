@@ -31,7 +31,7 @@ public class CustomerController {
   public ResponseEntity<?> getCustomersByCountry(@RequestParam int page,
       @RequestParam int size, @PathVariable String country,
       @RequestParam(required = false) String state){
-    return ResponseEntity.ok(customerService.getAllCustomerByCountry(page, size, country, state));
+    return ResponseEntity.ok(customerService.getAllCustomerByCountryAndState(page, size, country, state));
   }
 
   @GetMapping("/state/{state}")

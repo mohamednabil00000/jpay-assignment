@@ -25,14 +25,31 @@ public class CustomerServiceImpl implements CustomerService {
     this.modelMapper = modelMapper;
   }
 
+  /**
+   * Get all customers using pagination.
+   *
+   * @param page number of page
+   * @param size limit
+   * @return list of customer dto
+   */
   @Override
   public List<CustomerDTO> getAllCustomer(int page, int size){
     Page<Customer> customersPage = customerDAO.findAll(PageRequest.of(page, size));
+    // map customer model into customer dto
     return customersPage.getContent().stream()
         .map(customer -> modelMapper.map(customer, CustomerDTO.class))
         .collect(Collectors.toList());
   }
 
+  /**
+   * Get all customers by country and optional state filter.
+   *
+   * @param page page number
+   * @param size limit
+   * @param country country name
+   * @param state state[valid-not_valid]
+   * @return list of customers dto
+   */
   @Override
   public List<CustomerDTO> getAllCustomerByCountryAndState(int page, int size, String country, String state){
     String countryCode = CountryCodeHelper.getCountryCode(country);
@@ -43,12 +60,20 @@ public class CustomerServiceImpl implements CustomerService {
       customers = customerDAO.findValidPhonesAndCountry(countryCode, PhoneNumberStateHelper.patterns, page*size, size);
     else
       customers = customerDAO.findInvalidPhonesAndCountry(countryCode, PhoneNumberStateHelper.patterns, page*size, size);
-
+    // map customer model into customer dto
     return customers.stream()
         .map(customer -> modelMapper.map(customer, CustomerDTO.class))
         .collect(Collectors.toList());
   }
 
+  /**
+   * Get all customers by state filter.
+   *
+   * @param page page number
+   * @param size limit
+   * @param state state [valid - not_valid]
+   * @return
+   */
   @Override
   public List<CustomerDTO> getAllCustomerByState(int page, int size, String state){
     List<Customer> customersPage;
@@ -57,7 +82,7 @@ public class CustomerServiceImpl implements CustomerService {
       customersPage = customerDAO.findValidPhones(PhoneNumberStateHelper.patterns, offset, size);
     else
       customersPage = customerDAO.findInvalidPhones(PhoneNumberStateHelper.patterns, offset, size);
-
+    // map customer model into customer dto
     return customersPage.stream()
         .map(customer -> modelMapper.map(customer, CustomerDTO.class))
         .collect(Collectors.toList());

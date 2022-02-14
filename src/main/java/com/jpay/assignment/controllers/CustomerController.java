@@ -1,6 +1,7 @@
 package com.jpay.assignment.controllers;
 
 import com.jpay.assignment.services.CustomerServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,11 +23,13 @@ public class CustomerController {
     this.customerService = customerService;
   }
 
+  @Operation(summary = "Get all customers using pagination")
   @GetMapping
   public ResponseEntity<?> getAllCustomers(@RequestParam int page, @RequestParam int size){
     return ResponseEntity.ok(customerService.getAllCustomer(page, size));
   }
 
+  @Operation(summary = "Get all customers using pagination and filter by country and state")
   @GetMapping("/country/{country}")
   public ResponseEntity<?> getCustomersByCountry(@RequestParam int page,
       @RequestParam int size, @PathVariable String country,
@@ -34,6 +37,7 @@ public class CustomerController {
     return ResponseEntity.ok(customerService.getAllCustomerByCountryAndState(page, size, country, state));
   }
 
+  @Operation(summary = "Get all customers using pagination and filter by state only")
   @GetMapping("/state/{state}")
   public ResponseEntity<?> getCustomersByState(@RequestParam int page, @RequestParam int size, @PathVariable String state){
     return ResponseEntity.ok(customerService.getAllCustomerByState(page, size, state));

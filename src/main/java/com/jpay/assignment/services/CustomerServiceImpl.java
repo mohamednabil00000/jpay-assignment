@@ -1,6 +1,7 @@
 package com.jpay.assignment.services;
 
 import com.jpay.assignment.helpers.CountryCodeHelper;
+import com.jpay.assignment.helpers.PhoneNumberStateHelper;
 import com.jpay.assignment.models.Customer;
 import com.jpay.assignment.dtos.CustomerDTO;
 import com.jpay.assignment.repos.CustomerDAO;
@@ -31,11 +32,30 @@ public class CustomerServiceImpl {
         .collect(Collectors.toList());
   }
 
-  public List<CustomerDTO> getAllCustomerByCountry(int page, int size, String country){
+  public List<CustomerDTO> getAllCustomerByCountry(int page, int size, String country, String state){
     String countryCode = CountryCodeHelper.getCountryCode(country);
+    List<Customer> customers;
+    if(state == null)
+      customers = customerDAO.findByPhoneStartingWith(countryCode, PageRequest.of(page, size)).getContent();
+    else if(state.equals("valid"))
+      customers = customerDAO.findValidPhonesAndCountry(countryCode, PhoneNumberStateHelper.patterns, page*size, size);
+    else
+      customers = customerDAO.findInvalidPhonesAndCountry(countryCode, PhoneNumberStateHelper.patterns, page*size, size);
 
-    Page<Customer> customersPage = customerDAO.findByPhoneStartingWith(countryCode, PageRequest.of(page, size));
-    return customersPage.getContent().stream()
+    return customers.stream()
+        .map(customer -> modelMapper.map(customer, CustomerDTO.class))
+        .collect(Collectors.toList());
+  }
+
+  public List<CustomerDTO> getAllCustomerByState(int page, int size, String state){
+    List<Customer> customersPage;
+    int offset = page * size;
+    if(state.equals("valid"))
+      customersPage = customerDAO.findValidPhones(PhoneNumberStateHelper.patterns, offset, size);
+    else
+      customersPage = customerDAO.findInvalidPhones(PhoneNumberStateHelper.patterns, offset, size);
+
+    return customersPage.stream()
         .map(customer -> modelMapper.map(customer, CustomerDTO.class))
         .collect(Collectors.toList());
   }

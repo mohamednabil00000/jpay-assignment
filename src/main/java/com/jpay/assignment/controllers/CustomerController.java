@@ -27,8 +27,15 @@ public class CustomerController {
     return ResponseEntity.ok(customerService.getAllCustomer(page, size));
   }
 
-  @GetMapping("/{country}")
-  public ResponseEntity<?> getCustomersByCountry(@RequestParam int page, @RequestParam int size, @PathVariable String country){
-    return ResponseEntity.ok(customerService.getAllCustomerByCountry(page, size, country));
+  @GetMapping("/country/{country}")
+  public ResponseEntity<?> getCustomersByCountry(@RequestParam int page,
+      @RequestParam int size, @PathVariable String country,
+      @RequestParam(required = false) String state){
+    return ResponseEntity.ok(customerService.getAllCustomerByCountry(page, size, country, state));
+  }
+
+  @GetMapping("/state/{state}")
+  public ResponseEntity<?> getCustomersByState(@RequestParam int page, @RequestParam int size, @PathVariable String state){
+    return ResponseEntity.ok(customerService.getAllCustomerByState(page, size, state));
   }
 }

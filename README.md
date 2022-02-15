@@ -2,20 +2,22 @@
 
 A single page application that shows customers info such as their name, phone number, country and state(valid or not valid).
 
+## requirements
+
+* Create API to get all customers.
+* Create API to get customers filtering by country or state or both of them.
+* Add unit test for services.
+* Dockerize the application.
+* Implement Pagination(bonus).
+* Add API documentation (Additional).
+
 ## Technologies
 
 * Backend: Java (Spring Boot)
 * Frontend: react
 
-## requirements
 
-* Implement Filtering by country, phone number validity or both.
-* Implement Pagination, Sorting by name and phone (bonus requirement).
-* Add API documentation (bonus requirement).
-* Add unit test for services.
-* Dockerize the project.
-
-## Enhancement plan for existing code in the future
+## Some staff we can add on the future
 
 * May we need use specification for advanced filtering
 * Adding authentication and Authorization
@@ -24,7 +26,7 @@ A single page application that shows customers info such as their name, phone nu
 * Adding functional tests
 * Adding testing cycle into CI using github actions
 
-## How to run the project
+## How to run the application
 
 1. Clone the project
    ```sh

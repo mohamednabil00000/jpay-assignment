@@ -26,7 +26,7 @@ public class BeansConfiguration {
     dataSourceBuilder.url(env.getProperty("url"));
     dataSourceBuilder.username(env.getProperty("username"));
     dataSourceBuilder.password(env.getProperty("password"));
-    dataSourceBuilder.type(CustomRegexSearch.class);
+    dataSourceBuilder.type(RegexConfiguration.class);
     return dataSourceBuilder.build();
   }
 

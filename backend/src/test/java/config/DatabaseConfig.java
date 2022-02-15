@@ -1,6 +1,6 @@
 package config;
 
-import com.jpay.assignment.config.CustomRegexSearch;
+import com.jpay.assignment.config.RegexConfiguration;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -40,7 +40,7 @@ public class DatabaseConfig {
     dataSourceBuilder.url(env.getProperty("url"));
     dataSourceBuilder.username(env.getProperty("user"));
     dataSourceBuilder.password(env.getProperty("password"));
-    dataSourceBuilder.type(CustomRegexSearch.class);
+    dataSourceBuilder.type(RegexConfiguration.class);
     return dataSourceBuilder.build();
   }
 

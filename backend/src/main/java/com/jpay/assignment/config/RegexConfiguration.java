@@ -11,7 +11,7 @@ import org.sqlite.Function;
  * there is no direct support for regex in sqlite3, we need to implement
  * it manually.
  */
-public class CustomRegexSearch extends SimpleDriverDataSource {
+public class RegexConfiguration extends SimpleDriverDataSource {
 
   @Override
   public Connection getConnection() throws SQLException {

@@ -44,5 +44,5 @@ A single page application that shows customers info such as their name, phone nu
    ```sh
    http://localhost:8083/swagger-ui.html
 
-## Run samples
+# Run samples
 

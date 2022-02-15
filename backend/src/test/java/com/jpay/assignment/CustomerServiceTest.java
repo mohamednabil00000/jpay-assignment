@@ -5,6 +5,7 @@ import com.jpay.assignment.models.Customer;
 import com.jpay.assignment.repos.CustomerDAO;
 import com.jpay.assignment.services.CustomerService;
 import config.DatabaseConfig;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
@@ -28,21 +29,24 @@ public class CustomerServiceTest {
   private CustomerDAO customerDAO;
 
   @Before
-  public void setUp() {
+  public void setup() {
     // Initializing some customers data to test all functions
-    customerDAO.save(new Customer("Walid-Morocco-invalid", "(212) 6007989253"));
-    customerDAO.save(new Customer("Yosaf-Morocco-valid", "(212) 698054317"));
-    customerDAO.save(new Customer("Younes-Morocco-invalid", "(212) 6546545369"));
-    customerDAO.save(new Customer("Houda-Morocco-invalid", "(212) 6617344445"));
-    customerDAO.save(new Customer("Edunildo-Mozambique-valid", "(258) 847651504"));
-    customerDAO.save(new Customer("Walla-Mozambique-valid", "(258) 846565883"));
-    customerDAO.save(new Customer("Ogwal-Uganda-invalid", "(256) 7771031454"));
-    customerDAO.save(new Customer("LOUIS-Cameroon-valid", "(237) 673122155"));
-    customerDAO.save(new Customer("Frehiwot-Ethiopia-valid", "(251) 988200000"));
+    Customer customer1 = new Customer("Walid-Morocco-invalid", "(212) 6007989253");
+    Customer customer2 = new Customer("Yosaf-Morocco-valid", "(212) 698054317");
+    Customer customer3 = new Customer("Younes-Morocco-invalid", "(212) 6546545369");
+    Customer customer4 = new Customer("Houda-Morocco-invalid", "(212) 6617344445");
+    Customer customer5 = new Customer("Edunildo-Mozambique-valid", "(258) 847651504");
+    Customer customer6 = new Customer("Walla-Mozambique-valid", "(258) 846565883");
+    Customer customer7 = new Customer("Ogwal-Uganda-invalid", "(256) 7771031454");
+    Customer customer8 = new Customer("LOUIS-Cameroon-valid", "(237) 673122155");
+    Customer customer9 = new Customer("Frehiwot-Ethiopia-valid", "(251) 988200000");
+    List<Customer> customers = Arrays.asList(customer1, customer2, customer3,
+        customer4, customer5, customer6, customer7, customer8, customer9);
+    customerDAO.saveAll(customers);
   }
 
   @After
-  public void onTearDown() {
+  public void destroy() {
     customerDAO.deleteAll();
   }
 

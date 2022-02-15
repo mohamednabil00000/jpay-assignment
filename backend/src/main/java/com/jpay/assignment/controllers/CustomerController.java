@@ -25,21 +25,28 @@ public class CustomerController {
 
   @Operation(summary = "Get all customers using pagination")
   @GetMapping
-  public ResponseEntity<?> getAllCustomers(@RequestParam int page, @RequestParam int size){
+  public ResponseEntity<?> getAllCustomers(
+      @RequestParam(defaultValue = "0", required = false) int page,
+      @RequestParam(defaultValue = "10", required = false) int size){
     return ResponseEntity.ok(customerService.getAllCustomer(page, size));
   }
 
   @Operation(summary = "Get all customers using pagination and filter by country and state")
   @GetMapping("/country/{country}")
-  public ResponseEntity<?> getCustomersByCountry(@RequestParam int page,
-      @RequestParam int size, @PathVariable String country,
+  public ResponseEntity<?> getCustomersByCountry(
+      @RequestParam(defaultValue = "0", required = false) int page,
+      @RequestParam(defaultValue = "10", required = false) int size,
+      @PathVariable String country,
       @RequestParam(required = false) String state){
     return ResponseEntity.ok(customerService.getAllCustomerByCountryAndState(page, size, country, state));
   }
 
   @Operation(summary = "Get all customers using pagination and filter by state only")
   @GetMapping("/state/{state}")
-  public ResponseEntity<?> getCustomersByState(@RequestParam int page, @RequestParam int size, @PathVariable String state){
+  public ResponseEntity<?> getCustomersByState(
+      @RequestParam(defaultValue = "0", required = false) int page,
+      @RequestParam(defaultValue = "10", required = false) int size,
+      @PathVariable String state){
     return ResponseEntity.ok(customerService.getAllCustomerByState(page, size, state));
   }
 }

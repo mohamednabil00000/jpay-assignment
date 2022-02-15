@@ -34,8 +34,8 @@ A single page application that shows customers info such as their name, phone nu
    ```
 2. Move to /jpay-assignment and run
    ```sh
-   docker-compose build
-   docker-compose up
+   $docker-compose build
+   $docker-compose up
 
 3. The application is now running and can be accessed through
    ```sh

@@ -19,7 +19,6 @@ A single page application that shows customers info such as their name, phone nu
 
 ## Some staff we can add on the future
 
-* May we need use specification for advanced filtering
 * Adding authentication and Authorization
 * Adding feature flags
 * Adding logs
@@ -39,12 +38,24 @@ A single page application that shows customers info such as their name, phone nu
 
 3. The application is now running and can be accessed through
    ```sh
-   http://localhost:8083/
+   http://localhost:3000/
 
-# API Documentation
-
+## API Documentation
    ```sh
    http://localhost:8083/swagger-ui.html
+   ```
+## Run samples
 
-# Run samples
-
+* All data
+ ![](screenshots/all.png)
+ 
+* Filter by Country
+ ![](screenshots/filterByCountry.png)
+  
+* Filter by State
+  ![](screenshots/filterByState.png)
+  
+* Filter by Country and State
+  ![](screenshots/filterByCountryAndState.png)
+  ![](screenshots/filterByCountryAndState2.png)
+ 

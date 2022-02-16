@@ -31,12 +31,14 @@ A single page application that shows customers info such as their name, phone nu
    ```sh
    git clone https://github.com/mohamednabil00000/jpay-assignment.git
    ```
-2. Move to /jpay-assignment and run
+2. Move to /jpay-assignment
+
+3. Then run:
    ```sh
    $ docker-compose build
    $ docker-compose up
 
-3. The application is now running and can be accessed through
+4. The application is now running and can be accessed through
    ```sh
    http://localhost:3000/
 
